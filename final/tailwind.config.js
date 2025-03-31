@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -22,5 +24,19 @@ module.exports = {
       },
     },
   }, // Personalizar o tailwindcss, atráves de temas e design
-  plugins: [], // Extensões e funcionalidades adicionais
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      const newClasses = {
+        ".skew-primary": {
+          transform: "skew(10deg)",
+        },
+        ".filter-gray": {
+          filter: "grayscale(100%)",
+        },
+      };
+      addUtilities(newClasses);
+    }),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+  ], // Extensões e funcionalidades adicionais
 };
